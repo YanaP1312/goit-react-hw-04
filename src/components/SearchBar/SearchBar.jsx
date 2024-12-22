@@ -1,3 +1,5 @@
+import { LuSearch } from "react-icons/lu";
+
 export default function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +15,9 @@ export default function SearchBar({ onSearch }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <button type="submit">Search</button>
+      <button type="submit">
+        <LuSearch />
+      </button>
       <input
         autoComplete="off"
         autoFocus
