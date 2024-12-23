@@ -13,5 +13,5 @@ export async function fetchImagesWithPhoto(query, page) {
       orientation: "landscape",
     },
   });
-  return response.data.results;
+  return response.data;
 }

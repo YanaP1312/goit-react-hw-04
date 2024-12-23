@@ -1,4 +1,6 @@
 import { LuSearch } from "react-icons/lu";
+import toast, { Toaster } from "react-hot-toast";
+import s from "./SearchBar.module.css";
 
 export default function SearchBar({ onSearch }) {
   const handleSubmit = (e) => {
@@ -6,7 +8,11 @@ export default function SearchBar({ onSearch }) {
     const form = e.target;
     const imageName = form.elements.imageName.value;
     if (imageName.trim() === "") {
-      alert("Please enter search term!");
+      toast("Please enter search term!", {
+        position: "top-right",
+        style: { background: "rgb(77, 77, 232)", color: "aliceblue" },
+        icon: "⚠️",
+      });
       return;
     }
     onSearch(imageName);
@@ -14,17 +20,20 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">
-        <LuSearch />
-      </button>
-      <input
-        autoComplete="off"
-        autoFocus
-        name="imageName"
-        type="text"
-        placeholder="Search images and photos"
-      />
-    </form>
+    <header>
+      <form onSubmit={handleSubmit}>
+        <button type="submit">
+          <LuSearch />
+        </button>
+        <input
+          autoComplete="off"
+          autoFocus
+          name="imageName"
+          type="text"
+          placeholder="Search images and photos"
+        />
+      </form>
+      <Toaster />
+    </header>
   );
 }
