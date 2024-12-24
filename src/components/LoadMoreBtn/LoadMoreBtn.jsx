@@ -1,11 +1,7 @@
-export default function LoadMoreBtn({ page, setPage }) {
-  const handleClick = () => {
-    setPage(page + 1);
-  };
-
+export default function LoadMoreBtn({ onClick }) {
   return (
     <div>
-      <button onClick={handleClick}>Load more</button>
+      <button onClick={onClick}>Load more</button>
     </div>
   );
 }
