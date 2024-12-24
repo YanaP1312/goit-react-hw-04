@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import { RiArrowLeftWideFill, RiArrowRightWideFill } from "react-icons/ri";
+import { useEffect } from "react";
 import s from "./ImageModal.module.css";
 
 Modal.setAppElement("#root");
@@ -7,7 +8,6 @@ Modal.setAppElement("#root");
 export default function ImageModal({
   isOpen,
   onRequestClose,
-  image,
   images,
   currentIndex,
   setCurrentIndex,
@@ -24,13 +24,32 @@ export default function ImageModal({
   };
 
   const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % images.length;
-    setCurrentIndex(nextIndex);
+    if (currentIndex < images.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
   };
   const handlePrev = () => {
-    const prevIndex = (currentIndex - 1) % images.length;
-    setCurrentIndex(prevIndex);
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowRight" && currentIndex < images.length) {
+        handleNext();
+      }
+      if (e.key === "ArrowLeft" && images.length > 0) {
+        handlePrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [currentIndex, isOpen, images]);
 
   return (
     <Modal
@@ -42,7 +61,7 @@ export default function ImageModal({
       // overlayClassName="overlay"
       // className="modal"
     >
-      <button onClick={handlePrev}>
+      <button onClick={handlePrev} disabled={currentIndex === 0}>
         <RiArrowLeftWideFill />
       </button>
       <img
@@ -50,10 +69,21 @@ export default function ImageModal({
         alt={images[currentIndex].description}
       />
 
-      <button onClick={handleNext}>
+      <button
+        onClick={handleNext}
+        disabled={currentIndex === images.length - 1}
+      >
         <RiArrowRightWideFill />
       </button>
       <p style={{ color: "black" }}>{images[currentIndex].description}</p>
+      <img
+        src={images[currentIndex].user.profile_image.medium}
+        alt={images[currentIndex].user.username}
+      />
+
+      <a href={images[currentIndex].user.portfolio_url} target="_blank">
+        {images[currentIndex].user.username}
+      </a>
     </Modal>
   );
 }

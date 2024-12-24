@@ -54,13 +54,16 @@ export default function App() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const openModal = (image) => {
+  const openModal = (image, index) => {
     setModalIsOpen(true);
+
     setSelectedImage(image);
+    setCurrentIndex(index);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
+
     setSelectedImage(null);
   };
 
@@ -81,7 +84,6 @@ export default function App() {
           images={images}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          image={images[currentIndex]}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
