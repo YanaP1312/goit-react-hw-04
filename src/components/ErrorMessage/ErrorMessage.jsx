@@ -1,7 +1,9 @@
-export default function ErrorMessage() {
+import s from "./ErrorMessage.module.css";
+
+export default function ErrorMessage({ children }) {
   return (
     <div>
-      <p>Something go wrong, please try again!</p>
+      <p className={s.error}>{children}</p>
     </div>
   );
 }

@@ -1,13 +1,10 @@
-/* .overlay {
+.overlay {
   background-color: rgba(0, 0, 0, 0.8);
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
 }
 
 .modal {
@@ -18,4 +15,62 @@
   max-height: 90%;
   outline: none;
   border-radius: 8px;
-} */
+}
+
+.imagePart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  margin: 10px;
+  background-color: transparent;
+  border: none;
+  transition: transform 1s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.2);
+}
+
+.img {
+  width: 100%;
+  max-height: 600px;
+}
+
+.photoInfo {
+  margin: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  white-space: nowrap;
+  font-style: italic;
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+}
+.userIcon {
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+}
+
+.userName {
+  font-weight: bold;
+  transform: color 1s ease-in-out;
+}
+.userName:hover {
+  color: rgb(42, 42, 183);
+}

@@ -32,6 +32,7 @@ export default function App() {
       try {
         setError(false);
         setLoading(true);
+        setNoResults(false);
         const data = await fetchImagesWithPhoto(searchQuery, page);
         if (data.results.length === 0) {
           setNoResults(true);
@@ -70,12 +71,16 @@ export default function App() {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      {noResults && "No photos found matching your request"}
+      {noResults && (
+        <ErrorMessage children={"No photos found matching your request"} />
+      )}
       {images.length > 0 && (
         <ImageGallery images={images} onClick={openModal} />
       )}
       {loading && <Loader />}
-      {error && <ErrorMessage />}
+      {error && (
+        <ErrorMessage children={"Something go wrong, please try again!"} />
+      )}
       {images.length > 0 && page < totalPages && (
         <LoadMoreBtn onClick={loadMore} />
       )}

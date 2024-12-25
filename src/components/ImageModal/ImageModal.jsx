@@ -20,6 +20,7 @@ export default function ImageModal({
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
+      // backgroundColor: "rgba(0, 0, 255, 0.4)",
     },
   };
 
@@ -57,33 +58,52 @@ export default function ImageModal({
       onRequestClose={onRequestClose}
       contentLabel="Image modal"
       style={customStyles}
-
-      // overlayClassName="overlay"
-      // className="modal"
+      overlayClassName={s.overlay}
+      className={s.modal}
     >
-      <button onClick={handlePrev} disabled={currentIndex === 0}>
-        <RiArrowLeftWideFill />
-      </button>
-      <img
-        src={images[currentIndex].urls.regular}
-        alt={images[currentIndex].description}
-      />
+      <div className={s.imagePart}>
+        <button
+          className={s.btn}
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+        >
+          <RiArrowLeftWideFill size="30" />
+        </button>
+        <div className={s.image}>
+          <img
+            className={s.img}
+            src={images[currentIndex].urls.regular}
+            alt={images[currentIndex].description}
+          />
+        </div>
 
-      <button
-        onClick={handleNext}
-        disabled={currentIndex === images.length - 1}
-      >
-        <RiArrowRightWideFill />
-      </button>
-      <p style={{ color: "black" }}>{images[currentIndex].description}</p>
-      <img
-        src={images[currentIndex].user.profile_image.medium}
-        alt={images[currentIndex].user.username}
-      />
+        <button
+          className={s.btn}
+          onClick={handleNext}
+          disabled={currentIndex === images.length - 1}
+        >
+          <RiArrowRightWideFill size="30" />
+        </button>
+      </div>
+      <div className={s.photoInfo}>
+        <p className={s.description}>{images[currentIndex].description}</p>
+        <div className={s.userInfo}>
+          <img
+            className={s.userIcon}
+            src={images[currentIndex].user.profile_image.small}
+            alt={images[currentIndex].user.username}
+          />
 
-      <a href={images[currentIndex].user.portfolio_url} target="_blank">
-        {images[currentIndex].user.username}
-      </a>
+          <a
+            className={s.userName}
+            href={images[currentIndex].user.portfolio_url}
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+          >
+            {images[currentIndex].user.username}
+          </a>
+        </div>
+      </div>
     </Modal>
   );
 }
